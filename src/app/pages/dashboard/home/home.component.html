@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col">
+    <div *ngIf="auth.user$ | withLoading | async as user">
+      <ng-template [ngIf]="user.value">
+        <h3>Welcome back, {{ user.value.displayName }}</h3>
+      </ng-template>
+
+      <ng-template [ngIf]="user.loading">
+        <div
+          class="spinner-fixed"
+          [nbSpinner]="true"
+          nbSpinnerStatus="primary"
+        ></div>
+      </ng-template>
+    </div>
+  </div>
+</div>

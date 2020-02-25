@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <div *ngIf="auth.user$ | withLoading | async as user">
+    <ng-template [ngIf]="user?.value">
+      <p class="title">
+        <span class="mr-2"><strong>Discover</strong></span
+        >Easy-to-cook meals
+      </p>
+      <div *ngIf="posts$ | withLoading | async as posts" class="row">
+        <ng-container *ngFor="let post of posts.value">
+          <div class="col-lg-4 col-md-6">
+            <ngx-recipe-card [recipe]="post"></ngx-recipe-card>
+          </div>
+        </ng-container>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="user?.loading">
+      <div class="spinner-fixed">
+        <div
+          class="spinner-status"
+          [nbSpinner]="true"
+          nbSpinnerStatus="primary"
+        ></div>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="!user?.value && !user?.loading">
+      <section class="hero">
+        <div class="hero__content">
+          <h1>Find a recipe<br />to try at home</h1>
+          <div class="hero__subtitle">
+            The best place to find and share home cooked recipes.
+          </div>
+          <button
+            [routerLink]="['/auth/register']"
+            nbButton
+            class="hero btn-cta"
+            status="primary"
+          >
+            Get started
+            <span class="font-weight-normal">&nbsp;— it's free</span>
+          </button>
+        </div>
+        <div class="hero__image">
+          <img
+            class="img-fluid"
+            src="https://images.unsplash.com/photo-1543353071-873f17a7a088?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+            alt="illustration"
+          />
+        </div>
+      </section>
+    </ng-template>
+  </div>
+</div>

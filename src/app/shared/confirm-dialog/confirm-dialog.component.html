@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-body">
+    <h3>{{ mainTitle }}</h3>
+    <button
+      (click)="dialog.close(true)"
+      type="button"
+      fullWidth
+      size="large"
+      status="danger"
+      class="confirm-btn"
+      nbButton
+    >
+      {{ confirmTitle }}
+    </button>
+    <button
+      (click)="dialog.close()"
+      type="button"
+      ghost
+      fullWidth
+      size="large"
+      status="primary"
+      class="cancel-btn"
+      nbButton
+    >
+      {{ cancelTitle }}
+    </button>
+  </div>
+</div>

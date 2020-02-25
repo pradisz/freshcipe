@@ -1,0 +1,81 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+@include nb-install-component() {
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      font-size: 3.25rem;
+      line-height: 4.625rem;
+      margin: 0;
+    }
+
+    &__subtitle {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1.875rem;
+      max-width: 450px;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    &__image {
+      width: 450px;
+      height: 300px;
+    }
+
+    .btn-cta {
+      font-size: 1.125rem;
+      padding: 1.25rem 1.875rem;
+      border-radius: 0;
+      text-transform: none;
+      margin-bottom: 1rem;
+    }
+  }
+
+  p.title {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+
+  @include media-breakpoint-down(lg) {
+    .hero {
+      h1 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+      }
+
+      &__subtitle {
+        font-size: 0.875rem;
+        line-height: 1.675rem;
+        max-width: 300px;
+      }
+
+      &__image {
+        width: 300px;
+        height: 100%;
+      }
+
+      .btn-cta {
+        font-size: 1rem;
+        padding: 1rem 1.8rem;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .hero__image {
+      display: none;
+    }
+
+    p.title {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
+}

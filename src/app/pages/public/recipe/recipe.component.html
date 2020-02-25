@@ -1,0 +1,111 @@
+<div class="wrapper row justify-content-center">
+  <div class="col-md-8" *ngIf="recipe$ | withLoading | async as recipe">
+    <ng-template [ngIf]="recipe?.value">
+      <div class="d-flex flex-wrap align-items-center">
+        <figure title="{{ recipe.value.title }}">
+          <img
+            *ngIf="recipe.value.cover"
+            src="{{ recipe.value.cover }}"
+            alt="{{ recipe.value.title }}"
+          />
+          <!-- <figcaption>
+            <button
+              (click)="saveRecipe(recipe?.value)"
+              type="button"
+              nbButton
+              ghost
+              status="primary"
+            >
+              <span *ngIf="isFavourite == false">Save</span>
+              <span *ngIf="isFavourite == true">Saved</span>
+            </button>
+          </figcaption> -->
+        </figure>
+        <button
+          (click)="saveRecipe(recipe?.value)"
+          type="button"
+          nbButton
+          outline
+          [ngClass]="{
+            'favourite-btn': !isFavourite,
+            'madeit-btn': isFavourite
+          }"
+        >
+          <span *ngIf="!isFavourite">Save this recipe</span>
+          <span *ngIf="isFavourite">I have made it!</span>
+        </button>
+      </div>
+
+      <h1>{{ recipe.value.title }}</h1>
+      <p>{{ recipe.value.subtitle }}</p>
+      <hr />
+      <div class="row align-items-center mb-3">
+        <div class="col-lg-4 col-5">
+          <span>Preparation time</span>
+        </div>
+        <div class="col-lg-8 col-7">
+          <span>{{ recipe.value.prepTime }}</span>
+        </div>
+      </div>
+      <div class="row align-items-center mb-3">
+        <div class="col-lg-4 col-5">
+          <span>Serving amount</span>
+        </div>
+        <div class="col-lg-8 col-7">
+          <span>{{ recipe.value.servingAmount }}</span>
+        </div>
+      </div>
+      <div class="row align-items-center mb-3">
+        <div class="col-lg-4 col-5">
+          <span>Recipe by</span>
+        </div>
+        <div class="col-lg-8 col-7">
+          <div class="user-container">
+            <div
+              class="user-picture image"
+              [style.background-image]="
+                'url(' + recipe.value.author.photoURL + ')'
+              "
+            ></div>
+
+            <div class="user-info">
+              <div class="user-info__name">
+                <a [routerLink]="['/user', recipe.value.author.username]">{{
+                  recipe.value.author.displayName
+                }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="description">
+        <p>{{ recipe.value.description }}</p>
+      </div>
+      <h3>Ingredients</h3>
+      <div class="mb-5">
+        <nb-checkbox
+          *ngFor="let item of recipe.value.ingredients"
+          status="danger"
+          ><p>{{ item.ingredient }}</p></nb-checkbox
+        >
+      </div>
+      <h3>Steps</h3>
+      <div class="mb-5">
+        <nb-checkbox *ngFor="let item of recipe.value.steps" status="success"
+          ><p>{{ item.step }}</p></nb-checkbox
+        >
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="recipe?.loading">
+      <div class="spinner-fixed">
+        <div
+          class="spinner-status"
+          [nbSpinner]="true"
+          nbSpinnerStatus="primary"
+        ></div>
+      </div>
+    </ng-template>
+  </div>
+</div>

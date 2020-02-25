@@ -1,0 +1,130 @@
+<div class="wrapper row justify-content-center">
+  <div *ngIf="auth.user$ | async as user" class="col-lg-5 col-md-8">
+    <h1>Settings</h1>
+    <hr />
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <div class="form-group_username">
+          <input
+            nbInput
+            fullWidth
+            fieldSize="large"
+            value="https://www.recipes.co/"
+            readonly
+          />
+          <input
+            formControlName="username"
+            id="username"
+            type="text"
+            nbInput
+            fullWidth
+            fieldSize="large"
+          />
+        </div>
+
+        <nb-alert *ngIf="username.invalid && username.dirty" status="danger">
+          <span *ngIf="!username.errors.required"
+            >{{ username.value }} is already taken</span
+          >
+          <span *ngIf="username.errors.required">Username is required</span>
+        </nb-alert>
+
+        <!-- <nb-alert *ngIf="username.valid" status="success"
+          >{{ username.value }} is available</nb-alert
+        >
+
+        <nb-alert
+          *ngIf="username.pending && (username.dirty || username.touched)"
+          status="info"
+          >Hold tight... Checking availability of {{ username.value }}</nb-alert
+        > -->
+      </div>
+      <div class="form-group">
+        <label for="displayName">Display Name</label>
+        <input
+          formControlName="displayName"
+          id="displayName"
+          type="text"
+          nbInput
+          fullWidth
+          fieldSize="large"
+        />
+
+        <nb-alert
+          *ngIf="displayName.invalid && displayName.dirty"
+          status="danger"
+        >
+          <span *ngIf="displayName.errors.required"
+            >Display name is required</span
+          >
+        </nb-alert>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input
+          formControlName="location"
+          id="location"
+          type="text"
+          nbInput
+          fullWidth
+          fieldSize="large"
+        />
+      </div>
+      <div class="form-group">
+        <label for="bio">Bio</label>
+        <textarea
+          formControlName="bio"
+          id="bio"
+          type="text"
+          nbInput
+          fullWidth
+          fieldSize="large"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="avatar">Avatar</label>
+        <div class="avatar-form">
+          <div
+            class="user-picture image"
+            [style.background-image]="
+              'url(' + (photoURL ? photoURL : user.photoURL) + ')'
+            "
+          ></div>
+          <div class="upload">
+            <button type="button" nbButton ghost status="primary">
+              Upload a Photo
+            </button>
+            <input
+              id="photo"
+              type="file"
+              accept="image/*"
+              (change)="onSelectFile($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        [disabled]="!profileForm.valid || !profileForm.touched"
+        type="submit"
+        nbButton
+        fullWidth
+        size="large"
+        status="primary"
+        [nbSpinner]="loading"
+      >
+        Save changes
+      </button>
+    </form>
+    <button
+      routerLink="['/']"
+      nbButton
+      ghost
+      fullWidth
+      size="large"
+      status="primary"
+    >
+      Cancel
+    </button>
+  </div>
+</div>

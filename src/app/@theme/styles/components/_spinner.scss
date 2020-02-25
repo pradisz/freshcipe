@@ -1,0 +1,28 @@
+//
+// Spinner
+//
+.spinner-relative {
+  position: relative;
+  background-color: unset;
+  width: nb-theme(spinner-height-tiny);
+  height: nb-theme(spinner-height-tiny);
+}
+
+.spinner-fixed {
+  position: fixed;
+  background-color: transparent;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+
+.spinner-status {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -40px 0 0 -40px;
+}

@@ -1,0 +1,52 @@
+<div class="recipe-card">
+  <figure class="recipe-card__rollover" title="{{ recipe.title }}">
+    <a [routerLink]="['/recipe', recipe.recipeId]"
+      ><img
+        *ngIf="recipe.cover"
+        [ngClass]="{ rollover: showActionBtn }"
+        src="{{ recipe.cover }}"
+        alt="{{ recipe.title }}"
+    /></a>
+    <figcaption *ngIf="authUser?.uid == recipe.author.userId && showActionBtn">
+      <div class="recipe-card__action">
+        <button
+          (click)="editRecipe()"
+          type="button"
+          nbButton
+          ghost
+          status="primary"
+        >
+          Edit
+        </button>
+      </div>
+    </figcaption>
+  </figure>
+
+  <div class="recipe-card__content">
+    <div class="recipe-card__title">
+      <a [routerLink]="['/recipe', recipe.recipeId]">{{ recipe.title }}</a>
+    </div>
+    <div class="recipe-card__subtitle">{{ recipe.subtitle }}</div>
+  </div>
+
+  <hr />
+
+  <div class="recipe-card__info">
+    <div class="user-container">
+      <div
+        class="user-picture image"
+        [style.background-image]="'url(' + recipe.author.photoURL + ')'"
+      ></div>
+
+      <div class="user-info">
+        <div class="user-info__name">
+          BY
+          <a [routerLink]="['/user', recipe.author.username]"
+            ><strong>{{ recipe.author.displayName }}</strong></a
+          >
+        </div>
+      </div>
+    </div>
+    {{ recipe.prepTime }}
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="wrapper">
+  <div class="profile-container">
+    <div class="col-lg-6">
+      <div class="user-container">
+        <div
+          class="user-picture image"
+          [style.background-image]="'url(' + user?.photoURL + ')'"
+        ></div>
+      </div>
+      <h1>{{ user?.displayName }}</h1>
+      <p>{{ user?.location }}</p>
+      <p>{{ user?.bio }}</p>
+    </div>
+  </div>
+
+  <hr />
+
+  <div *ngIf="userFavourites$ | withLoading | async as userFavourites">
+    <ng-template [ngIf]="userFavourites.value && userFavourites.value != 0">
+      <div class="title">
+        Favourites
+      </div>
+      <div class="row">
+        <div
+          *ngFor="let favRecipe of userFavourites.value"
+          class="col-lg-4 col-md-6"
+        >
+          <ngx-recipe-card
+            [recipe]="favRecipe"
+            (isFavourited)="onSaveFavourite($event)"
+          ></ngx-recipe-card>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- <ng-template [ngIf]="userFavourites?.loading">
+      <div class="spinner-fixed">
+        <div
+          class="spinner-status"
+          [nbSpinner]="true"
+          nbSpinnerStatus="primary"
+        ></div>
+      </div>
+    </ng-template> -->
+  </div>
+
+  <div *ngIf="userRecipes$ | withLoading | async as userRecipes">
+    <div class="title">
+      Recipes
+    </div>
+    <div class="row">
+      <div *ngIf="authUser?.uid == user?.uid" class="col-lg-4 col-md-6">
+        <div class="card-button">
+          <button
+            [routerLink]="['/add-recipe']"
+            type="button"
+            status="primary"
+            nbButton
+          >
+            Add a recipe
+          </button>
+        </div>
+      </div>
+      <ng-template [ngIf]="userRecipes.value && userRecipes.value != 0">
+        <div *ngFor="let recipe of userRecipes.value" class="col-lg-4 col-md-6">
+          <ngx-recipe-card
+            [recipe]="recipe"
+            [showActionBtn]="true"
+            [authUser]="authUser"
+          ></ngx-recipe-card>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

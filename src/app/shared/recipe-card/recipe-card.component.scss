@@ -1,0 +1,144 @@
+@import '../../@theme/styles/themes';
+
+.recipe-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: white;
+  background-clip: border-box;
+  border: 1px solid #eeeeee;
+  border-radius: 0;
+  margin: 1.25rem 0;
+
+  hr {
+    margin: 0;
+  }
+
+  &__content {
+    padding: 0.75rem 0.75rem 2.5rem;
+  }
+
+  &__title {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    padding-bottom: 0.75rem;
+
+    a {
+      color: nb-theme(color-basic-800);
+    }
+  }
+
+  &__subtitle {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .user-picture {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+  }
+
+  .user-info__name {
+    font-weight: 500;
+    text-transform: uppercase;
+
+    a {
+      color: nb-theme(color-basic-800);
+    }
+  }
+}
+
+figure.recipe-card__rollover {
+  position: relative;
+  overflow: hidden;
+  background: nb-theme(color-basic-700);
+  width: 100%;
+  height: 255px;
+  border-radius: 0;
+  text-align: center;
+  margin: 0;
+  cursor: pointer;
+}
+
+figure.recipe-card__rollover img,
+figure.recipe-card__rollover img.rollover {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
+}
+
+figure.recipe-card__rollover figcaption {
+  position: absolute;
+  top: 8%;
+  right: 6%;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+figure.recipe-card__rollover figcaption::before,
+figure.recipe-card__rollover figcaption::after {
+  pointer-events: none;
+}
+
+figure.recipe-card__rollover figcaption {
+  width: auto;
+  height: auto;
+  opacity: 0;
+}
+
+figure.recipe-card__rollover:hover figcaption {
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+}
+
+.recipe-card__action button {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: none;
+  color: nb-theme(color-basic-100) !important;
+  border-color: nb-theme(color-basic-100);
+  border-radius: 1.25rem;
+  border-style: solid;
+  border-width: 1px;
+  padding: 8px 16px;
+}
+
+.recipe-card__action button:hover {
+  transition: all 0.3s ease-in-out;
+  opacity: 0.8;
+}
+
+figure.recipe-card__rollover:hover img {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+figure.recipe-card__rollover:hover img.rollover {
+  opacity: 0.6;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}

@@ -1,0 +1,18 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  h1 {
+    font-size: 1.875rem;
+    line-height: 4.625rem;
+    margin: 0;
+  }
+
+  .user-picture {
+    margin-right: 0.625rem;
+  }
+
+  button {
+    text-transform: none;
+    border-radius: 0;
+  }
+}

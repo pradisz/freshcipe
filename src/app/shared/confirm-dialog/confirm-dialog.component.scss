@@ -1,0 +1,39 @@
+@import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+@include nb-install-component() {
+  .card {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .card {
+      padding: 4rem;
+    }
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  button.confirm-btn,
+  button.cancel-btn {
+    font-size: 0.8125rem;
+    border-radius: 0;
+    text-transform: none;
+  }
+
+  button.cancel-btn {
+    &.appearance-ghost {
+      margin: 0.625rem 0;
+
+      &:hover {
+        color: nb-theme(color-primary-500);
+        background-color: #ffd8c9;
+      }
+    }
+  }
+}

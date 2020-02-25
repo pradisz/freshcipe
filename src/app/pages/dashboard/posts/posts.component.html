@@ -1,0 +1,43 @@
+<div class="wrapper row justify-content-center">
+  <div class="col-md-8">
+    <div class="table-header">
+      <h1>Posts</h1>
+      <button [routerLink]="['/dashboard/add-post']" nbButton status="primary">
+        + Add a Recipe
+      </button>
+    </div>
+    <table class="table table-responsive-md table-hover table-centered mb-0">
+      <thead>
+        <tr>
+          <th>Recipe</th>
+          <th>User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of posts$ | async">
+          <td>
+            <a [routerLink]="['/recipe', post?.id]"
+              ><strong>{{ post?.title }}</strong></a
+            >
+          </td>
+          <td class="user-container">
+            <div
+              class="user-picture image"
+              *ngIf="post.author?.photoURL"
+              [style.background-image]="'url(' + post.author?.photoURL + ')'"
+            ></div>
+
+            <div class="user-info">
+              <div class="user-info_name">
+                {{ post.author?.displayName }}
+              </div>
+              <div class="user-info_email">
+                {{ post.author?.email }}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

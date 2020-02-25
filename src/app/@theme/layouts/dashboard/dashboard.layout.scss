@@ -1,0 +1,14 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  ::ng-deep nb-layout-header {
+    nav {
+      height: auto;
+      padding: 0;
+    }
+  }
+  nb-layout-column {
+    background-color: nb-theme(background-basic-color-1);
+  }
+}

@@ -1,0 +1,27 @@
+@mixin ngx-table() {
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0;
+    margin-bottom: 1rem;
+  }
+
+  table {
+    thead {
+      th {
+        font-weight: 500;
+        border-bottom: 0;
+        padding: 1.25rem;
+      }
+    }
+
+    tbody {
+      td {
+        padding: 1.25rem;
+        border-color: #dedede;
+        vertical-align: middle;
+      }
+    }
+  }
+}

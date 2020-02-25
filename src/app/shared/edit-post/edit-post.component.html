@@ -1,0 +1,223 @@
+<div class="wrapper row justify-content-center">
+  <div class="col-lg-8 col-md-10">
+    <form [formGroup]="postForm" (ngSubmit)="submitRecipe()">
+      <div class="d-flex flex-wrap align-items-center">
+        <div class="cover-form">
+          <div
+            *ngIf="coverURL"
+            class="cover-form_image"
+            [style.background-image]="'url(' + coverURL + ')'"
+          >
+            <div class="cover-form_image-overlay"></div>
+            <div *ngIf="coverURL" class="cover-form_change-cover">
+              <button type="button" nbButton ghost status="primary">
+                Change Cover
+              </button>
+              <input
+                id="cover"
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                (change)="onSelectFile($event)"
+              />
+            </div>
+          </div>
+          <div *ngIf="!coverURL" class="cover-form_upload">
+            <button type="button" nbButton ghost status="primary">
+              Add Cover
+            </button>
+            <input
+              id="cover"
+              type="file"
+              accept="image/*"
+              (change)="onSelectFile($event)"
+            />
+          </div>
+        </div>
+
+        <button
+          *ngIf="recipeId"
+          (click)="deleteRecipe()"
+          type="button"
+          nbButton
+          outline
+          class="delete-btn"
+          status="primary"
+        >
+          Delete this recipe
+        </button>
+      </div>
+      <textarea
+        formControlName="title"
+        id="title"
+        type="text"
+        placeholder="Untitled"
+        nbInput
+        fullWidth
+        fieldSize="large"
+        class="title"
+      ></textarea>
+      <input
+        formControlName="subtitle"
+        id="subtitle"
+        type="text"
+        placeholder="with Tomatoes and Parmesan"
+        nbInput
+        fullWidth
+        fieldSize="large"
+      />
+      <hr />
+      <div class="row align-items-center mb-3">
+        <div class="col-lg-4 col-5">
+          <span>Preparation time</span>
+        </div>
+        <div class="col-lg-8 col-7">
+          <input
+            formControlName="prepTime"
+            id="prepTime"
+            type="text"
+            placeholder="30 minutes"
+            nbInput
+            fullWidth
+          />
+        </div>
+      </div>
+      <div class="row align-items-center mb-3">
+        <div class="col-lg-4 col-5">
+          <span>Serving amount</span>
+        </div>
+        <div class="col-lg-8 col-7">
+          <input
+            formControlName="servingAmount"
+            id="servingAmount"
+            type="number"
+            placeholder="2"
+            nbInput
+            fullWidth
+          />
+        </div>
+      </div>
+      <hr />
+      <textarea
+        formControlName="description"
+        id="description"
+        type="text"
+        placeholder="Add description"
+        rows="5"
+        nbInput
+        fullWidth
+        fieldSize="large"
+        class="mb-5"
+      ></textarea>
+      <h3>Ingredients</h3>
+      <div formArrayName="ingredients" class="mb-5">
+        <div
+          *ngFor="
+            let ingredient of ingredientsFormGroup.controls;
+            let i = index
+          "
+        >
+          <div [formGroupName]="i" class="d-flex align-items-center">
+            <nb-checkbox status="danger" disabled>
+              <input
+                formControlName="ingredient"
+                id="ingredients"
+                type="text"
+                rows="5"
+                placeholder="1 unit Yellow Onion"
+                nbInput
+                fullWidth
+              />
+            </nb-checkbox>
+            <button
+              *ngIf="ingredientsFormGroup.controls.length > 1"
+              (click)="removeIngredient(i)"
+              type="button"
+              nbTooltip="Remove ingredient"
+              nbButton
+              ghost
+              class="close-btn"
+            >
+              <nb-icon icon="close-outline"></nb-icon>
+            </button>
+          </div>
+        </div>
+        <button
+          (click)="addIngredient()"
+          type="button"
+          nbButton
+          ghost
+          class="add-btn"
+        >
+          + Add more ingredients
+        </button>
+      </div>
+
+      <h3>Steps</h3>
+      <div formArrayName="steps" class="mb-5">
+        <div *ngFor="let step of stepsFormGroup.controls; let i = index">
+          <div [formGroupName]="i" class="d-flex align-items-center">
+            <nb-checkbox status="success" disabled>
+              <textarea
+                formControlName="step"
+                id="steps"
+                type="text"
+                placeholder="How to make it?"
+                nbInput
+                fullWidth
+              ></textarea
+            ></nb-checkbox>
+            <button
+              *ngIf="stepsFormGroup.controls.length > 1"
+              (click)="removeStep(i)"
+              type="button"
+              nbTooltip="Remove step"
+              nbButton
+              ghost
+              class="close-btn"
+            >
+              <nb-icon icon="close-outline"></nb-icon>
+            </button>
+          </div>
+        </div>
+        <button
+          (click)="addStep()"
+          type="button"
+          nbButton
+          ghost
+          class="add-btn"
+        >
+          + Add more steps
+        </button>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <button
+            [disabled]="!postForm.valid"
+            type="submit"
+            nbButton
+            fullWidth
+            size="large"
+            status="primary"
+            [nbSpinner]="loading"
+            class="save-btn"
+          >
+            <span *ngIf="!recipeId">Save recipe</span>
+            <span *ngIf="recipeId">Update recipe</span>
+          </button>
+          <button
+            (click)="cancel()"
+            type="button"
+            nbButton
+            ghost
+            fullWidth
+            size="large"
+            status="primary"
+            class="cancel-btn"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

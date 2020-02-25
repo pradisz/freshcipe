@@ -1,0 +1,85 @@
+<div class="wrapper row justify-content-center">
+  <div class="col-xl-5 col-lg-6 col-md-7">
+    <h1>Sign in to continue</h1>
+    <nb-alert *ngIf="error" status="danger">
+      {{ error }}
+    </nb-alert>
+    <button
+      (click)="facebookSignin()"
+      nbButton
+      class="social-login_facebook"
+      fullWidth
+      size="large"
+    >
+      <i class="facebook"></i>
+      <ng-container
+        *ngIf="auth.user$ | async; then fbAuthenticated; else fbGuest"
+      ></ng-container>
+
+      <ng-template #fbAuthenticated>Signed with Facebook</ng-template>
+      <ng-template #fbGuest>Sign in with Facebook</ng-template>
+    </button>
+    <button
+      (click)="googleSignin()"
+      nbButton
+      class="social-login_google"
+      fullWidth
+      size="large"
+    >
+      <i class="google"></i>
+      <ng-container
+        *ngIf="auth.user$ | async; then googleAuthenticated; else googleGuest"
+      ></ng-container>
+
+      <ng-template #googleAuthenticated>Signed with Google</ng-template>
+      <ng-template #googleGuest>Sign in with Google</ng-template>
+    </button>
+    <div class="or">
+      <span>Or</span>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="emailLogin()">
+      <div class="form-group">
+        <input
+          formControlName="email"
+          type="text"
+          nbInput
+          fullWidth
+          fieldSize="large"
+          placeholder="Email"
+          [ngClass]="{ 'is-invalid': submitted && email.invalid }"
+        />
+        <div class="text-invalid" *ngIf="email.invalid && email.dirty">
+          <span *ngIf="email.errors.required">Email is required</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          formControlName="password"
+          type="password"
+          nbInput
+          fullWidth
+          fieldSize="large"
+          placeholder="Password"
+          [ngClass]="{ 'is-invalid': submitted && password.invalid }"
+        />
+        <div class="text-invalid" *ngIf="password.invalid && password.dirty">
+          <span *ngIf="password.errors.required">Password is required</span>
+        </div>
+      </div>
+      <button
+        type="submit"
+        nbButton
+        fullWidth
+        size="large"
+        status="primary"
+        [nbSpinner]="loading"
+      >
+        Log in
+      </button>
+    </form>
+    <div class="links">
+      <a [routerLink]="['/auth/register']">Don’t have an account?</a>
+      <!-- <a href="javascript:void(0);">Forgot password?</a> -->
+    </div>
+  </div>
+</div>

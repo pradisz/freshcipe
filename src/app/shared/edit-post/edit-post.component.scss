@@ -1,0 +1,333 @@
+@import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+@include nb-install-component() {
+  .wrapper {
+    counter-reset: section;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    color: nb-theme(color-basic-700);
+    margin: 0;
+  }
+
+  .cover-form {
+    margin: 2rem 0;
+
+    &_image {
+      position: relative;
+      flex-shrink: 0;
+      width: 11.25rem;
+      height: 11.25rem;
+      border-radius: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: 0.5s ease;
+
+      &:hover {
+        .cover-form_image-overlay {
+          display: block;
+          background: rgba(0, 0, 0, 0.3);
+        }
+
+        .cover-form_change-cover {
+          position: absolute;
+          top: 40%;
+          left: 23%;
+          transition: 0.5s ease;
+          opacity: 1;
+
+          button {
+            font-size: 0.75rem;
+            color: nb-theme(color-basic-100);
+            border-color: nb-theme(color-basic-100);
+            border-radius: 1.25rem;
+            border-style: solid;
+            border-width: 1px;
+          }
+
+          &:hover {
+            button {
+              background-color: transparent;
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+
+    &_image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      transition: background 0.5s ease;
+    }
+
+    &_upload,
+    &_change-cover {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+
+      button {
+        color: nb-theme(color-basic-600);
+        font-weight: 500;
+        text-transform: none;
+        border-radius: 0;
+        padding: 8px 6px;
+      }
+
+      &:hover {
+        button {
+          background-color: #efefef;
+        }
+      }
+
+      input[type='file'] {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+    }
+
+    &_change-cover {
+      opacity: 0;
+    }
+  }
+
+  .delete-btn {
+    margin-left: 0.5rem;
+    background-color: nb-theme(color-basic-100);
+    border-radius: 0;
+    text-transform: none;
+
+    &:hover {
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    .delete-btn {
+      margin-left: 1.5rem;
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    .delete-btn {
+      margin-left: 0;
+    }
+  }
+
+  input {
+    color: nb-theme(color-basic-800);
+    font-weight: 500;
+    background-color: nb-theme(color-basic-100);
+    border-width: 0;
+    border-radius: 0;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+
+    &:hover {
+      background-color: #efefef;
+    }
+
+    &:focus {
+      border-color: nb-theme(color-basic-700);
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: nb-theme(color-basic-500);
+    }
+
+    &.ng-invalid {
+      border-color: nb-theme(color-danger-500);
+    }
+
+    &#subtitle {
+      padding-left: 0;
+      padding-right: 0;
+
+      &:hover {
+        background-color: nb-theme(color-basic-100);
+      }
+    }
+  }
+
+  textarea {
+    color: nb-theme(color-basic-800);
+    font-weight: 500;
+    background-color: nb-theme(color-basic-100);
+    border-width: 0;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+
+    &:focus {
+      border-color: nb-theme(color-basic-700);
+      box-shadow: none;
+    }
+
+    &.title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      line-height: 2.5rem;
+      margin: 0.67em 0;
+
+      &::placeholder {
+        font-size: 1.875rem;
+        font-weight: 700;
+        line-height: 2.5rem;
+        color: nb-theme(color-basic-500);
+      }
+    }
+  }
+
+  ::ng-deep nb-checkbox.status-danger,
+  ::ng-deep nb-checkbox.status-success {
+    width: 100%;
+
+    .label {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      margin: 0;
+      min-height: inherit;
+      padding: 10px 0;
+      width: 100%;
+    }
+
+    .text {
+      width: 100%;
+    }
+
+    .custom-checkbox {
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: none;
+    }
+  }
+
+  ::ng-deep nb-checkbox.status-danger {
+    .custom-checkbox {
+      background-color: nb-theme(color-basic-100);
+      border-color: #aaaaaa;
+      &:hover {
+        background-color: #fea79a;
+        border-color: #fea79a;
+      }
+
+      &.checked {
+        background-color: #fea79a;
+        box-shadow: none;
+      }
+    }
+
+    .native-input:focus + .custom-checkbox {
+      border-color: #aaaaaa;
+    }
+
+    .native-input:disabled {
+      & + .custom-checkbox {
+        background-color: nb-theme(color-basic-100);
+        border-color: #aaaaaa;
+      }
+    }
+
+    input:hover {
+      background-color: transparent;
+    }
+  }
+
+  ::ng-deep nb-checkbox.status-success {
+    .custom-checkbox {
+      background-color: #efefef;
+      border-color: #efefef;
+      border-style: nb-theme(checkbox-border-style);
+      border-width: nb-theme(checkbox-border-width);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover,
+      &.disabled {
+        background-color: #98fbb1;
+        border-color: #98fbb1;
+      }
+
+      &.checked {
+        background-color: #98fbb1;
+        box-shadow: none;
+
+        &:after {
+          content: '';
+        }
+      }
+
+      &:after {
+        counter-increment: section;
+        content: counter(section);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+
+    .native-input:focus + .custom-checkbox {
+      border-color: #efefef;
+    }
+
+    .native-input:disabled {
+      & + .custom-checkbox {
+        background-color: #efefef;
+        border-color: #efefef;
+      }
+    }
+
+    textarea {
+      padding-left: 0.625rem;
+      padding-right: 0.625rem;
+      &::placeholder {
+        color: nb-theme(color-basic-500);
+      }
+    }
+  }
+
+  .close-btn,
+  .add-btn {
+    padding: 0;
+  }
+
+  .add-btn {
+    text-transform: unset;
+    margin: 0.9375rem 3.5rem;
+  }
+
+  button.save-btn,
+  button.cancel-btn {
+    font-size: 0.8125rem;
+    border-radius: 0;
+    text-transform: none;
+  }
+
+  button.cancel-btn {
+    &.appearance-ghost {
+      margin: 1rem 0;
+
+      &:hover {
+        color: nb-theme(color-primary-500);
+        background-color: #ffd8c9;
+      }
+    }
+  }
+}

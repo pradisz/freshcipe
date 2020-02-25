@@ -1,0 +1,123 @@
+<div class="header-container">
+  <div class="logo-container">
+    <a [routerLink]="['/']"
+      ><img class="brand" src="assets/images/brand.svg" alt="freshcipe"
+    /></a>
+    <ng-container *ngIf="auth.user$ | async as user">
+      <ng-container
+        *ngIf="auth.roleIsAdmin(user) && router.url.includes('dashboard')"
+      >
+        <div class="vr"></div>
+        <a [routerLink]="['/dashboard']"><span>Dashboard</span></a>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<div *ngIf="auth.user$ | withLoading | async as user" class="header-container">
+  <ng-template [ngIf]="user.value">
+    <div
+      *ngIf="auth.roleIsAdmin(user.value) && router.url.includes('dashboard')"
+      class="nav-link"
+    >
+      <a [routerLink]="['posts']" routerLinkActive="active">Posts</a>
+      <a [routerLink]="['members']" routerLinkActive="active">Members</a>
+    </div>
+    <div class="user-container">
+      <div class="user-info">
+        <div *ngIf="!router.url.includes('dashboard')" class="user-info__name">
+          <a [routerLink]="['/user', user.value.username]">{{
+            user.value.displayName
+          }}</a>
+        </div>
+      </div>
+
+      <div ngbDropdown #drop="ngbDropdown">
+        <a
+          ngbDropdownToggle
+          data-toggle="dropdown"
+          on-mouseover="$event.stopPropagation(); drop.open()"
+          class="dropdown-toggle"
+        >
+          <div
+            *ngIf="user.value.photoURL"
+            class="user-picture image"
+            [style.background-image]="'url(' + user.value.photoURL + ')'"
+          ></div>
+          <nb-icon icon="chevron-down"></nb-icon>
+        </a>
+
+        <div
+          ngbDropdownMenu
+          class="dropdown-menu dropdown-menu-right dropdown-lg"
+        >
+          <!-- <a
+            ngbDropdownItem
+            [routerLink]="['/dashboard']"
+            *ngIf="
+              auth.roleIsAdmin(user.value) && !router.url.includes('dashboard')
+            "
+            >Dashboard</a
+          > -->
+          <hr />
+          <a ngbDropdownItem [routerLink]="['/user', user.value.username]"
+            >Profile</a
+          >
+          <hr />
+          <a ngbDropdownItem [routerLink]="['/settings']">Settings</a>
+          <hr />
+          <a ngbDropdownItem class="logout" (click)="auth.signOut()">
+            Logout
+            <nb-icon icon="log-out"></nb-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- <button
+      *ngIf="
+        !router.url.includes('dashboard') &&
+        !router.url.includes('/add-recipe') &&
+        !router.url.includes('/edit-recipe') &&
+        !router.url.includes('/recipe')
+      "
+      [routerLink]="['/add-recipe']"
+      nbButton
+      class="btn-submit"
+      outline
+      status="primary"
+    >
+      Submit Your Recipe!
+    </button> -->
+  </ng-template>
+
+  <ng-template [ngIf]="user.loading">
+    <div
+      class="spinner-relative"
+      [nbSpinner]="true"
+      nbSpinnerStatus="primary"
+      nbSpinnerSize="tiny"
+    ></div>
+  </ng-template>
+
+  <ng-template [ngIf]="!user.value && !user.loading && router.url == '/'">
+    <a [routerLink]="['/auth/login']" class="auth-link"><span>Log in</span></a>
+    <button
+      [routerLink]="['/auth/login']"
+      nbButton
+      class="btn-login"
+      ghost
+      status="primary"
+    >
+      Log in
+    </button>
+    <button
+      [routerLink]="['/auth/register']"
+      nbButton
+      class="btn-cta"
+      outline
+      status="primary"
+    >
+      Get started <span class="font-weight-normal">&nbsp;— it's free</span>
+    </button>
+  </ng-template>
+</div>

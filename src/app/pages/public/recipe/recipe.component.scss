@@ -1,0 +1,267 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+@include nb-install-component() {
+  .wrapper {
+    counter-reset: section;
+  }
+
+  h1 {
+    margin: 0.67em 0;
+  }
+
+  p {
+    line-height: 1.5625rem;
+  }
+
+  .favourite-btn,
+  .madeit-btn {
+    margin-left: 1.5rem;
+    background-color: nb-theme(color-basic-100);
+    border-radius: 0;
+    text-transform: none;
+
+    &:hover {
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  .favourite-btn {
+    border-color: nb-theme(color-basic-500);
+    color: nb-theme(color-basic-800);
+  }
+
+  @include media-breakpoint-down(xs) {
+    .favourite-btn,
+    .madeit-btn {
+      margin-left: 0;
+    }
+  }
+
+  figure {
+    position: relative;
+    overflow: hidden;
+    background: nb-theme(color-basic-700);
+    width: 11.25rem;
+    height: 11.25rem;
+    border-radius: 0;
+    text-align: center;
+    margin: 1.5rem 0 2.5rem;
+    // cursor: pointer;
+  }
+
+  figure img {
+    position: relative;
+    display: block;
+    min-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+  }
+
+  figure figcaption {
+    position: absolute;
+    top: 8%;
+    right: 6%;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  // figure figcaption::before,
+  // figure figcaption::after {
+  //   pointer-events: none;
+  // }
+
+  // figure figcaption {
+  //   width: auto;
+  //   height: auto;
+  //   opacity: 0;
+  // }
+
+  // figure:hover figcaption {
+  //   transition: all 0.3s ease-in-out;
+  //   opacity: 1;
+  // }
+
+  // figcaption button {
+  //   font-size: 0.75rem;
+  //   font-weight: 500;
+  //   text-transform: none;
+  //   color: nb-theme(color-basic-100) !important;
+  //   border-color: nb-theme(color-basic-100);
+  //   border-radius: 1.25rem;
+  //   border-style: solid;
+  //   border-width: 1px;
+  //   padding: 8px 16px;
+  // }
+
+  // figcaption button:hover {
+  //   transition: all 0.3s ease-in-out;
+  //   opacity: 0.8;
+  // }
+
+  figure:hover img {
+    // opacity: 0.6;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  .description {
+    margin-bottom: 50px;
+  }
+
+  .user-picture {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+  }
+
+  .user-info__name {
+    font-weight: 700;
+
+    a {
+      color: nb-theme(color-basic-800);
+    }
+  }
+
+  ::ng-deep nb-checkbox.status-danger,
+  ::ng-deep nb-checkbox.status-success {
+    width: 100%;
+
+    .label {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      margin: 0;
+      min-height: inherit;
+      padding: 10px 0;
+      width: 100%;
+    }
+
+    .text {
+      width: 100%;
+    }
+
+    .custom-checkbox {
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: none;
+    }
+  }
+
+  ::ng-deep nb-checkbox.status-danger {
+    .custom-checkbox {
+      background-color: nb-theme(color-basic-100);
+      border-color: #aaaaaa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        background-color: #fea79a;
+        border-color: #fea79a;
+
+        &:after {
+          content: '';
+          display: block;
+          background: url('assets/images/baseline-check-24px.svg') no-repeat;
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      &.checked {
+        background-color: #fea79a;
+        border-color: #fea79a;
+        box-shadow: none;
+
+        &:after {
+          content: '';
+          display: block;
+          background: url('assets/images/baseline-check-24px.svg') no-repeat;
+          width: 24px;
+          height: 24px;
+        }
+
+        nb-icon {
+          display: none;
+          color: nb-theme(color-basic-800);
+        }
+      }
+    }
+
+    .native-input:focus + .custom-checkbox {
+      border-color: #fea79a;
+    }
+
+    input:hover {
+      background-color: transparent;
+    }
+
+    p {
+      margin-top: 0.5rem;
+    }
+  }
+
+  ::ng-deep nb-checkbox.status-success {
+    .custom-checkbox {
+      background-color: #efefef;
+      border-color: #efefef;
+      border-style: nb-theme(checkbox-border-style);
+      border-width: nb-theme(checkbox-border-width);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background-color: #98fbb1;
+        border-color: #98fbb1;
+
+        &:after {
+          content: '';
+          display: block;
+          background: url('assets/images/baseline-check-24px.svg') no-repeat;
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      &.checked {
+        background-color: #98fbb1;
+        box-shadow: none;
+
+        &:after {
+          content: '';
+          display: block;
+          background: url('assets/images/baseline-check-24px.svg') no-repeat;
+          width: 24px;
+          height: 24px;
+        }
+
+        nb-icon {
+          display: none;
+          color: nb-theme(color-basic-800);
+        }
+      }
+
+      &:after {
+        counter-increment: section;
+        content: counter(section);
+        font-size: 1rem;
+        font-weight: 500;
+        color: nb-theme(color-basic-800);
+      }
+    }
+
+    .native-input:focus + .custom-checkbox {
+      border-color: #98fbb1;
+    }
+  }
+}

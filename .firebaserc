@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "dev": "freshcipe-dev",
+    "staging": "freshcipe"
+  }
+}
