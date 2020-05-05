@@ -10,8 +10,4 @@ export class MemberService {
       .collection('users', ref => ref.orderBy('joined', 'asc'))
       .valueChanges();
   }
-
-  // getTotalMembers() {
-  //   return this.afs.collection('users', ref => ref.orderBy("memberCount", "asc")).valueChanges();
-  // }
 }

@@ -32,16 +32,6 @@
         </div>
       </div>
     </ng-template>
-
-    <!-- <ng-template [ngIf]="userFavourites?.loading">
-      <div class="spinner-fixed">
-        <div
-          class="spinner-status"
-          [nbSpinner]="true"
-          nbSpinnerStatus="primary"
-        ></div>
-      </div>
-    </ng-template> -->
   </div>
 
   <div *ngIf="userRecipes$ | withLoading | async as userRecipes">

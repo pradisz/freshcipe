@@ -8,18 +8,6 @@
             src="{{ recipe.value.cover }}"
             alt="{{ recipe.value.title }}"
           />
-          <!-- <figcaption>
-            <button
-              (click)="saveRecipe(recipe?.value)"
-              type="button"
-              nbButton
-              ghost
-              status="primary"
-            >
-              <span *ngIf="isFavourite == false">Save</span>
-              <span *ngIf="isFavourite == true">Saved</span>
-            </button>
-          </figcaption> -->
         </figure>
         <button
           (click)="saveRecipe(recipe?.value)"
@@ -87,14 +75,15 @@
         <nb-checkbox
           *ngFor="let item of recipe.value.ingredients"
           status="danger"
-          ><p>{{ item.ingredient }}</p></nb-checkbox
         >
+          <p>{{ item.ingredient }}</p>
+        </nb-checkbox>
       </div>
       <h3>Steps</h3>
       <div class="mb-5">
-        <nb-checkbox *ngFor="let item of recipe.value.steps" status="success"
-          ><p>{{ item.step }}</p></nb-checkbox
-        >
+        <nb-checkbox *ngFor="let item of recipe.value.steps" status="success">
+          <p>{{ item.step }}</p>
+        </nb-checkbox>
       </div>
     </ng-template>
 

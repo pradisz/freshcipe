@@ -51,14 +51,6 @@
           ngbDropdownMenu
           class="dropdown-menu dropdown-menu-right dropdown-lg"
         >
-          <!-- <a
-            ngbDropdownItem
-            [routerLink]="['/dashboard']"
-            *ngIf="
-              auth.roleIsAdmin(user.value) && !router.url.includes('dashboard')
-            "
-            >Dashboard</a
-          > -->
           <hr />
           <a ngbDropdownItem [routerLink]="['/user', user.value.username]"
             >Profile</a
@@ -73,21 +65,6 @@
         </div>
       </div>
     </div>
-    <!-- <button
-      *ngIf="
-        !router.url.includes('dashboard') &&
-        !router.url.includes('/add-recipe') &&
-        !router.url.includes('/edit-recipe') &&
-        !router.url.includes('/recipe')
-      "
-      [routerLink]="['/add-recipe']"
-      nbButton
-      class="btn-submit"
-      outline
-      status="primary"
-    >
-      Submit Your Recipe!
-    </button> -->
   </ng-template>
 
   <ng-template [ngIf]="user.loading">
